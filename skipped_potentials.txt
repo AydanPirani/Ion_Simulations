@@ -1,0 +1,4 @@
+Test 1 (no funnel, 100 same electrodes, no electrodes independent): 45 points skipped
+Test 2 (no funnel, 100 same electrodes, all electrodes independent): 50 points skipped
+Test 3 (no funnel, 002 same electrodes, no electrodes independent): 1 point skipped
+Test 4 (no funnel, 002 same electrodes, all electrodes independent): 
