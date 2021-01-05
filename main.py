@@ -3,6 +3,7 @@ import pathlib
 from datetime import datetime
 from data_analysis import gen_lists
 from statistics import stdev
+from numpy import linspace
 
 # Sets default path to parent SIMION folder
 path = pathlib.Path(__file__).parent.absolute()
@@ -12,14 +13,34 @@ print(path)
 # Defines output files
 log_output = open("Garcia_Lab/log.txt", "a")
 
-
 # Statistics that will be measured - total and average time
 start_time = datetime.now()
 total_iterations = 0
 
-for ac_voltage in range(0,1):
-    for dc_voltage in range(0,1):
-        print("AC: {}V, DC: {}V".format(ac_voltage,dc_voltage))
+# Parameters for the test
+samples = 5     # Total amount of "samples", or test points, that will be taken.
+
+ac_start = 0    # Start value for AC and DC voltage ranges
+dc_start = 0
+
+ac_end = 10000      # End value for AC and DC voltage ranges
+dc_end = 10000
+
+#Standardizing start and end params
+ac_interval = (ac_end - ac_start)/samples
+dc_interval = (dc_end - dc_start)/samples
+
+ac_start += 0.5 * ac_interval
+dc_start += 0.5 * dc_interval
+
+ac_end -= 0.5 * ac_interval
+dc_end -= 0.5 * dc_interval
+
+for ac_voltage in linspace(ac_start, ac_end, samples):
+    ac_voltage = round(ac_voltage, 3)
+    for dc_voltage in linspace(dc_start, dc_end, samples):
+        dc_voltage = round(dc_voltage, 3)
+        print("AC: {}V, interval = {}V; DC: {}V, interval = {}V".format(ac_voltage, ac_interval, dc_voltage, dc_interval))
         total_iterations += 1
 
         # Opens Command Line and runs main.lua in SIMION
